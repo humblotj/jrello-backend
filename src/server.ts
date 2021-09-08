@@ -46,7 +46,7 @@ class Server {
     }
 
     start() {
-        this.app.listen((process.env.PORT || 5000), () => {
+        this.app.listen((process.env.PORT || 3800), () => {
             console.log(`Server on port ${this.app.get("port")}`);
         });
     }

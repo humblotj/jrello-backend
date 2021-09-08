@@ -5,7 +5,7 @@ import List from "../models/list.model";
 import Card from "../models/card.model";
 
 export const getBoard = async (req: Request, res: Response) => {
-    const { name } = req.params;
+    const { name } = req.body;
 
     if (!name) {
         return res.status(400).json("Invalid param");
