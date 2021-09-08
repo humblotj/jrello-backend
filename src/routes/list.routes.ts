@@ -4,7 +4,7 @@ import { updateList, deleteList } from '../controllers/list';
 
 const router = Router();
 
-router.post('/update', updateList);
-router.post('/delete', deleteList);
+router.put('/:id', updateList);
+router.delete('/:id', deleteList);
 
 export default router;

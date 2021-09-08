@@ -9,10 +9,14 @@ export const updateList = async (req: Request, res: Response) => {
         return res.status(400).json(error.message);
     }
 
-    const { id, ...rest } = req.body;
+    const { id } = req.params;
+
+    if (!id) {
+        res.status(400).json("Invalid param");
+    }
 
     try {
-        const update = await List.findOneAndUpdate({ _id: id }, rest, {
+        const update = await List.findOneAndUpdate({ _id: id }, req.body, {
             new: true,
         });
         return res.status(200).json(update);

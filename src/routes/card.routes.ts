@@ -4,7 +4,7 @@ import { updateCard, deleteCard } from '../controllers/card';
 
 const router = Router();
 
-router.post('/update', updateCard);
-router.post('/delete', deleteCard);
+router.put('/:id', updateCard);
+router.delete('/:id', deleteCard);
 
 export default router;

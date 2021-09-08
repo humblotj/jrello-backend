@@ -3,7 +3,6 @@ import Joi from "joi";
 //test validation
 export const cardValidation = (data: any) => {
   const cardSchema = Joi.object({
-    id: Joi.string().required(),
     idBoard: Joi.string().required(),
     idList: Joi.string().required(),
     name: Joi.string().required(),
@@ -17,7 +16,6 @@ export const cardValidation = (data: any) => {
 
 export const listValidation = (data: any) => {
   const listSchema = Joi.object({
-    id: Joi.string().required(),
     idBoard: Joi.string().required(),
     name: Joi.string().required(),
     pos: Joi.number().required(),
