@@ -3,6 +3,20 @@ import { Request, Response } from 'express';
 import { cardValidation } from '../libs/joi';
 import Card from "../models/card.model";
 
+export const createCard = async (req: Request, res: Response) => {
+    const { error } = cardValidation(req.body);
+    if (error)
+        return res.status(400).json(error.message);
+
+    const cardMd = new Card(req.body);
+    try {
+        const saved = await cardMd.save();
+        return res.status(200).json(saved);
+    } catch (error) {
+        return res.status(400).json(error.message);
+    }
+};
+
 export const updateCard = async (req: Request, res: Response) => {
     const { error } = cardValidation(req.body);
     if (error) {
@@ -24,6 +38,7 @@ export const updateCard = async (req: Request, res: Response) => {
         return res.status(400).json(error.message);
     }
 };
+
 export const deleteCard = async (req: Request, res: Response) => {
     const { id } = req.params;
 

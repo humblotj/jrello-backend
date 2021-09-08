@@ -33,7 +33,7 @@ class Server {
         this.app.set("port", process.env.API_PORT || 3800);
         this.app.use(morgan("dev"));
         this.app.use(express.json());
-        this.app.use(express.urlencoded({ extended: false }));
+        this.app.use(express.urlencoded({ extended: true }));
         this.app.use(helmet());
         this.app.use(compression());
         this.app.use(cors());
