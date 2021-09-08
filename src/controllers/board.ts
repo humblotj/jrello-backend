@@ -5,8 +5,8 @@ import List from "../models/list.model";
 import Card from "../models/card.model";
 
 export const getBoard = async (req: Request, res: Response) => {
+    console.log(req.body);
     const { name } = req.body;
-
     if (!name) {
         return res.status(400).json("Invalid param");
     }
@@ -20,7 +20,7 @@ export const getBoard = async (req: Request, res: Response) => {
             return res.status(200).json({ lists, cards });
         } else {
             board = await new Board({ name }).save();
-            return res.status(200).json({ lists: [], card: [] });
+            return res.status(200).json({ lists: [], cards: [] });
         }
     }
     catch (error) {
