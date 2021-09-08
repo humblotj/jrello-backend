@@ -1,0 +1,27 @@
+import Joi from "joi";
+
+//test validation
+export const cardValidation = (data: any) => {
+  const cardSchema = Joi.object({
+    id: Joi.string().required(),
+    idBoard: Joi.string().required(),
+    idList: Joi.string().required(),
+    name: Joi.string().required(),
+    pos: Joi.number().required(),
+    subscribed: Joi.boolean().required(),
+    desc: Joi.string().required(),
+    closed: Joi.boolean().required(),
+  });
+  return cardSchema.validate(data);
+};
+
+export const listValidation = (data: any) => {
+  const listSchema = Joi.object({
+    id: Joi.string().required(),
+    idBoard: Joi.string().required(),
+    name: Joi.string().required(),
+    pos: Joi.number().required(),
+    subscribed: Joi.boolean().required(),
+  });
+  return listSchema.validate(data);
+};

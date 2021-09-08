@@ -1,12 +1,18 @@
 import { Document, Schema, model } from "mongoose";
 
 interface IList extends Document {
-    name: string
+    idBoard: string,
+    name: string,
+    pos: number,
+    subscribed: boolean,
 }
 
 const listSchema = new Schema(
     {
+        idBoard: { type: String, required: true },
         name: { type: String, required: true },
+        pos: { type: Number, required: true },
+        subscribed: { type: Boolean, default: false },
     },
     {
         versionKey: false,
