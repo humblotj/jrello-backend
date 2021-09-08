@@ -7,6 +7,10 @@ import mongoose from "mongoose"; //mongodb framework
 import dotenv from "dotenv"; //.env use for typescript
 dotenv.config();
 
+import BoardRoutes from './routes/board.routes';
+import ListRoutes from './routes/list.routes';
+import CardRoutes from './routes/card.routes';
+
 class Server {
     private app: express.Application;
 
@@ -36,8 +40,9 @@ class Server {
     }
 
     routes() {
-        // this.app.use("/item-list", ItemListRoutes);
-        // this.app.use("/subscription", SubscribeRoutes);
+        this.app.use("/board", BoardRoutes);
+        this.app.use("/list", ListRoutes);
+        this.app.use("/card", CardRoutes);
     }
 
     start() {

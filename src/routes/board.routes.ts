@@ -1,9 +1,9 @@
 import { Router } from 'express';
 
+import { getBoard } from '../controllers/board';
+
 const router = Router();
 
-router.get('/');
-
-router.post('/');
+router.post('/', getBoard);
 
 export default router;

@@ -1,9 +1,10 @@
 import { Router } from 'express';
 
+import { updateCard, deleteCard } from '../controllers/card';
+
 const router = Router();
 
-router.get('/');
-
-router.post('/');
+router.post('/update', updateCard);
+router.post('/delete', deleteCard);
 
 export default router;

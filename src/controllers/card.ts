@@ -20,7 +20,7 @@ export const updateCard = async (req: Request, res: Response) => {
         return res.status(400).json(error.message);
     }
 };
-export const deleteItem = async (req: Request, res: Response) => {
+export const deleteCard = async (req: Request, res: Response) => {
     const { id } = req.params;
 
     if (!id) {
