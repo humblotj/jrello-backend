@@ -17,10 +17,10 @@ export const getBoard = async (req: Request, res: Response) => {
             const idBoard = board._id;
             const lists = await List.find({ idBoard });
             const cards = await Card.find({ idBoard });
-            return res.status(200).json({ lists, cards });
+            return res.status(200).json({ id: idBoard, lists, cards });
         } else {
             board = await new Board({ name }).save();
-            return res.status(200).json({ lists: [], cards: [] });
+            return res.status(200).json({ id: board._id, lists: [], cards: [] });
         }
     }
     catch (error) {
