@@ -3,6 +3,8 @@ import { Request, Response } from 'express';
 import { cardValidation } from '../libs/joi';
 import Card from "../models/card.model";
 
+const posIncr = 65535;
+
 export const createCard = async (req: Request, res: Response) => {
     const { error } = cardValidation(req.body);
     if (error)
@@ -69,15 +71,25 @@ export const archiveAllCards = async (req: Request, res: Response) => {
     }
 }
 
-export const sortCards = async (req: Request, res: Response) => {
-    const { id, sortBy } = req.body;
+export const moveAllCards = async (req: Request, res: Response) => {
+    const { prev, next } = req.body;
 
-    if (!id) {
+    if (!prev || !next) {
         res.status(400).json("Invalid param");
     }
 
     try {
-        const cards = await Card.find({ idList: id });
+        const prevList = await Card.find({ idList: prev }).sort('pos');
+        const nextList = await Card.find({ idList: next }).sort('pos');
+        const lastPos = nextList.length ? nextList[nextList.length - 1].pos : 0;
+
+        await Promise.all(prevList.map((c, i) => Card.updateOne({ _id: c._id }, {
+            $set: {
+                idList: next,
+                pos: lastPos + i * posIncr + i
+            }
+        })));
+
         return res.status(200).json("success");
     } catch (error) {
         return res.status(400).json(error.message);
