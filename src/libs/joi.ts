@@ -8,7 +8,7 @@ export const cardValidation = (data: any) => {
     name: Joi.string().required(),
     pos: Joi.number().required(),
     subscribed: Joi.boolean().required(),
-    desc: Joi.string(),
+    desc: Joi.string().optional().allow(''),
     closed: Joi.boolean().required(),
   });
   return cardSchema.validate(data);
