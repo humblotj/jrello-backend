@@ -12,12 +12,12 @@ const todoList = [
     { name: '[Card] Comments', pos: posIncr * 6 + 5 },
     { name: '[Css] Responsive Design', pos: posIncr * 9 + 8, desc: 'Probably not... not important in this test project... A fixed width is fine here, I guess...' },
     { name: '[Css] Cross browsing', pos: posIncr * 10 + 9, desc: 'I am using a mac... Probably not...' },
-    { name: '[Backend] NodeJS Express + MongoodB Mongoose', pos: posIncr * 11 + 10, desc: 'Maybe one day... When I will have time... ( ͡~ ͜ʖ ͡°)\nNot complicated though.' },
 ];
 const doingList = [
     { name: '[Card] CheckList', pos: posIncr },
 ];
 const doneList = [
+    { name: '[Backend] NodeJS Express + MongoodB Mongoose', pos: posIncr / 64, desc: 'Maybe one day... When I will have time... ( ͡~ ͜ʖ ͡°)\nNot complicated though.\nDONE!' },
     { name: '[Animation] Draggable List', pos: posIncr / 32 },
     { name: '[Animation] Draggable Card', pos: posIncr / 16 },
     { name: '[Component Css] Card Edit', pos: posIncr / 8 },
