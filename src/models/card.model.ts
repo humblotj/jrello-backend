@@ -17,7 +17,7 @@ const cardSchema = new Schema(
         idList: { type: String, required: true },
         pos: { type: Number, required: true },
         subscribed: { type: Boolean, default: false },
-        desc: { type: String, required: true },
+        desc: { type: String, required: false },
         closed: { type: Boolean, default: false },
     },
     {
