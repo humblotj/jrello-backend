@@ -53,3 +53,33 @@ export const deleteCard = async (req: Request, res: Response) => {
         return res.status(400).json(error.message);
     }
 }
+
+export const archiveAllCards = async (req: Request, res: Response) => {
+    const { id } = req.body;
+
+    if (!id) {
+        res.status(400).json("Invalid param");
+    }
+
+    try {
+        await Card.updateMany({ idList: id }, { $set: { closed: true } })
+        return res.status(200).json("success");
+    } catch (error) {
+        return res.status(400).json(error.message);
+    }
+}
+
+export const sortCards = async (req: Request, res: Response) => {
+    const { id, sortBy } = req.body;
+
+    if (!id) {
+        res.status(400).json("Invalid param");
+    }
+
+    try {
+        const cards = await Card.find({ idList: id });
+        return res.status(200).json("success");
+    } catch (error) {
+        return res.status(400).json(error.message);
+    }
+}

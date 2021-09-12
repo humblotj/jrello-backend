@@ -15,8 +15,8 @@ export const getBoard = async (req: Request, res: Response) => {
         let board = await Board.findOne({ name });
         if (board) {
             const idBoard = board._id;
-            const lists = await List.find({ idBoard });
-            const cards = await Card.find({ idBoard });
+            const lists = await List.find({ idBoard }).sort('pos');
+            const cards = await Card.find({ idBoard }).sort('pos');
             return res.status(200).json({ id: idBoard, lists, cards });
         } else {
             board = await new Board({ name }).save();
