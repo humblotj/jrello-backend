@@ -107,10 +107,10 @@ export const sortCards = async (req: Request, res: Response) => {
         let list = null;
         switch (sortBy) {
             case 'newest':
-                list = await Card.find({ idList }).sort('createAt');
+                list = await Card.find({ idList }).sort('create_at');
                 break;
             case 'oldest':
-                list = await Card.find({ idList }).sort('-createAt');
+                list = await Card.find({ idList }).sort('-create_at');
                 break;
             case 'alphabetically':
                 list = await Card.find({ idList }).sort('name');
