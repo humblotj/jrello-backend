@@ -57,14 +57,14 @@ export const deleteCard = async (req: Request, res: Response) => {
 }
 
 export const archiveAllCards = async (req: Request, res: Response) => {
-    const { id } = req.body;
+    const { idList } = req.body;
 
-    if (!id) {
+    if (!idList) {
         res.status(400).json("Invalid param");
     }
 
     try {
-        await Card.updateMany({ idList: id }, { $set: { closed: true } })
+        await Card.updateMany({ idList }, { $set: { closed: true } })
         return res.status(200).json("success");
     } catch (error) {
         return res.status(400).json(error.message);
@@ -87,6 +87,42 @@ export const moveAllCards = async (req: Request, res: Response) => {
             $set: {
                 idList: next,
                 pos: lastPos + i * posIncr + i
+            }
+        })));
+
+        return res.status(200).json("success");
+    } catch (error) {
+        return res.status(400).json(error.message);
+    }
+}
+
+export const sortCards = async (req: Request, res: Response) => {
+    const { idList, sortBy } = req.body;
+
+    if (!idList) {
+        res.status(400).json("Invalid param");
+    }
+
+    try {
+        let list = null;
+        switch (sortBy) {
+            case 'newest':
+                list = await Card.find({ idList }).sort('createAt');
+                break;
+            case 'oldest':
+                list = await Card.find({ idList }).sort('-createAt');
+                break;
+            case 'alphabetically':
+                list = await Card.find({ idList }).sort('name');
+                break;
+            default:
+                list = await Card.find({ idList });
+                break;
+        }
+
+        await Promise.all(list.map((c, i) => Card.updateOne({ _id: c._id }, {
+            $set: {
+                pos: posIncr * i + (i - 1)
             }
         })));
 
